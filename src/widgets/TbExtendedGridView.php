@@ -3,7 +3,7 @@
  *
  * @author Antonio Ramirez <antonio@clevertech.biz>
  * @copyright Copyright &copy; Clevertech 2012-
- * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php) 
+ * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  * @package bootstrap.widgets
  */
 Yii::import('bootstrap.widgets.TbGridView');
@@ -529,7 +529,7 @@ class TbExtendedGridView extends TbGridView
 	public function renderTableRow($row)
 	{
 		$htmlOptions = array();
-		if ($this->rowHtmlOptionsExpression !== null) {
+		if (isset($this->rowHtmlOptionsExpression) && $this->rowHtmlOptionsExpression !== null) {
 			$data = $this->dataProvider->data[$row];
 			$options = $this->evaluateExpression(
 				$this->rowHtmlOptionsExpression,
