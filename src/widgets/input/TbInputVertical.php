@@ -1,18 +1,22 @@
 <?php
 /**
- * TbInputVertical class file.
+ *## TbInputVertical class file.
+ *
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
  * @copyright Copyright &copy; Christoffer Niska 2011-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @package bootstrap.widgets.input
  * @since 11/25/12 10:49 AM  updated by Antonio Ramirez <antonio@clevertech.biz>
  */
 
 Yii::import('bootstrap.widgets.input.TbInput');
 
 /**
- * Bootstrap vertical form input widget.
+ *## TbInputVertical class
+ *
+ * Bootstrap vertical form input widget
+ *
  * @since 0.9.8
+ * @package booster.widgets.forms.inputs
  */
 class TbInputVertical extends TbInput
 {
@@ -468,7 +472,7 @@ class TbInputVertical extends TbInput
 				'model' => $this->model,
 				'attribute' => $this->attribute,
 				'options' => isset($options) ? $options : array(),
-				'callback' => isset($callback) ? $callback : array(),
+				'callback' => isset($callback) ? $callback : '',
 				'htmlOptions' => $this->htmlOptions,
 			)
 		);
@@ -537,6 +541,12 @@ class TbInputVertical extends TbInput
 			$asDropDownList = $this->htmlOptions['asDropDownList'];
 			unset($this->htmlOptions['asDropDownList']);
 		}
+		
+		if (isset($this->htmlOptions['val']))
+		{
+			$val = $this->htmlOptions['val'];
+			unset($this->htmlOptions['val']);
+		}
 
 		echo $this->getLabel();
 		echo $this->getPrepend();
@@ -549,6 +559,7 @@ class TbInputVertical extends TbInput
 				'events' => isset($events) ? $events : array(),
 				'data' => isset($data) ? $data : array(),
 				'asDropDownList' => isset($asDropDownList) ? $asDropDownList : true,
+				'val' => isset($val) ? $val : null,
 				'htmlOptions' => $this->htmlOptions,
 				'form' => $this->form
 			)
