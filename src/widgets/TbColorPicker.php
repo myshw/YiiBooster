@@ -2,7 +2,7 @@
 /*## TbColorPicker widget class
  *
  * @author: yiqing95 <yiqing_95@qq.com>
- * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php) 
+ * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  * @package YiiBooster bootstrap.widgets
  * ------------------------------------------------------------------------
  *   in yii  use this to register the necessary js and css files :
@@ -21,19 +21,19 @@
 class TbColorPicker extends CInputWidget
 {
 
-	/**
+    /**
 	 * @var TbActiveForm when created via TbActiveForm.
 	 * this attribute is set to the form that renders the widget
 	 * @see TbActionForm->inputRow
 	 */
-	public $form;
+    public $form;
 
-	/**
+    /**
 	 * @var string the color format - hex | rgb | rgba. Defaults to 'hex'
 	 */
-	public $format = 'hex';
+    public $format = 'hex';
 
-	/**
+    /**
 	 * @var string[] the JavaScript event handlers.
 	 * @see <http://www.eyecon.ro/bootstrap-colorpicker/> events section
 	 *  show    This event fires immediately when the color picker is displayed.
@@ -42,61 +42,61 @@ class TbColorPicker extends CInputWidget
 	 *
 	 * <pre>
 	 *  'events'=>array(
-	 *      'changeColor'=>'js:function(ev){
+	 *      'changeColor'=>'js:function (ev) {
 	 *          console.log(ev.color.toHex());
 	 *      }',
-	 *      'hide'=>'js:function(ev){
+	 *      'hide'=>'js:function (ev) {
 	 *        console.log("I am hidden!");
 	 *   }')
 	 * </pre>
 	 */
-	public $events = array();
+    public $events = array();
 
-	/**
+    /**
 	 *### .run()
 	 *
 	 * Widget's run function
 	 */
-	public function run()
-	{
-		list($name, $id) = $this->resolveNameID();
+    public function run()
+    {
+        list($name, $id) = $this->resolveNameID();
 
-		$this->registerClientScript($id);
+        $this->registerClientScript($id);
 
-		$this->htmlOptions['id'] = $id;
+        $this->htmlOptions['id'] = $id;
 
-		// Do we have a model?
-		if ($this->hasModel()) {
-			if ($this->form) {
-				echo $this->form->textField($this->model, $this->attribute, $this->htmlOptions);
-			} else {
-				echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
-			}
-		} else {
-			echo CHtml::textField($name, $this->value, $this->htmlOptions);
-		}
-	}
+        // Do we have a model?
+        if ($this->hasModel()) {
+            if ($this->form) {
+                echo $this->form->textField($this->model, $this->attribute, $this->htmlOptions);
+            } else {
+                echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+            }
+        } else {
+            echo CHtml::textField($name, $this->value, $this->htmlOptions);
+        }
+    }
 
-	/**
+    /**
 	 *### .registerClientScript()
 	 *
 	 * Registers required
 	 *
 	 * @param string $id
 	 */
-	public function registerClientScript($id)
-	{
-		Yii::app()->bootstrap->registerAssetJs('bootstrap.colorpicker.js', CClientScript::POS_HEAD);
-		Yii::app()->bootstrap->registerAssetCss('bootstrap-colorpicker.css');
+    public function registerClientScript($id)
+    {
+        Yii::app()->bootstrap->registerAssetJs('bootstrap.colorpicker.js', CClientScript::POS_HEAD);
+        Yii::app()->bootstrap->registerAssetCss('bootstrap-colorpicker.css');
 
-		$options = !empty($this->format) ? CJavaScript::encode(array('format' => $this->format)) : '';
+        $options = !empty($this->format) ? CJavaScript::encode(array('format' => $this->format)) : '';
 
-		ob_start();
-		echo "jQuery('#{$id}').colorpicker({$options})";
-		foreach ($this->events as $event => $handler) {
-			echo ".on('{$event}', " . CJavaScript::encode($handler) . ")";
-		}
+        ob_start();
+        echo "jQuery('#{$id}').colorpicker({$options})";
+        foreach ($this->events as $event => $handler) {
+            echo ".on('{$event}', " . CJavaScript::encode($handler) . ")";
+        }
 
-		Yii::app()->getClientScript()->registerScript(__CLASS__ . '#' . $this->getId(), ob_get_clean() . ';');
-	}
+        Yii::app()->getClientScript()->registerScript(__CLASS__ . '#' . $this->getId(), ob_get_clean() . ';');
+    }
 }

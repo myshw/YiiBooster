@@ -3,7 +3,7 @@
  *
  * @author Antonio Ramirez <antonio@clevertech.biz>
  * @copyright Copyright &copy; Clevertech 2012-
- * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php) 
+ * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  * @package bootstrap.widgets
  */
 Yii::import('zii.widgets.grid.CCheckBoxColumn');
@@ -41,13 +41,13 @@ class TbBulkActions extends CComponent
      * @var array the checkbox column configuration
      */
     public $checkBoxColumnConfig = array();
-    
+
     /**
      * @var bool
      */
     public $selectableRows;
-	
-	/**
+
+    /**
 	 * @var string
 	 */
     public $noCheckedMessage = 'No items are checked';
@@ -80,7 +80,7 @@ class TbBulkActions extends CComponent
     {
         if ($this->_id !== null) {
             return $this->_id;
-        } else if ($autoGenerate) {
+        } elseif ($autoGenerate) {
             return $this->_id = 'egw' . self::$_counter++;
         }
     }
@@ -154,11 +154,13 @@ class TbBulkActions extends CComponent
                 } else {
                     $this->columnName = $this->grid->id . '_c' . $idx . '\[\]';
                 }
+
                 return true; // it has already a CCheckBoxColumn
             }
         }
         // not CCheckBoxColumn, attach one
         $this->attachCheckBoxColumn();
+
         return true;
     }
 
@@ -166,7 +168,7 @@ class TbBulkActions extends CComponent
      *### .initButtons()
      *
      * @throws CException
-     * @return bool initializes the buttons to be render
+     * @return bool       initializes the buttons to be render
      */
     public function initButtons()
     {
@@ -234,21 +236,17 @@ class TbBulkActions extends CComponent
      */
     public function registerClientScript()
     {
-       
+
         $js = '';
-        if(!$this->selectableRows)
-        {
+        if (!$this->selectableRows) {
         $js .= <<<EOD
-$(document).on("click", "#{$this->grid->id} input[type=checkbox]", function(){
+$(document).on("click", "#{$this->grid->id} input[type=checkbox]", function () {
 	var grid = $("#{$this->grid->id}");
-	if ($("input[name='{$this->columnName}']:checked", grid).length)
-	{
+	if ($("input[name='{$this->columnName}']:checked", grid).length) {
 
 		$(".bulk-actions-btn", grid).removeClass("disabled");
 		$("div.bulk-actions-blocker",grid).hide();
-	}
-	else
-	{
+	} else {
 		$(".bulk-actions-btn", grid).addClass("disabled");
 		$("div.bulk-actions-blocker",grid).show();
 	}
@@ -256,15 +254,15 @@ $(document).on("click", "#{$this->grid->id} input[type=checkbox]", function(){
 EOD;
 }
         foreach ($this->events as $buttonId => $handler) {
-            $js .= "\n$(document).on('click','#{$buttonId}', function(){
+            $js .= "\n$(document).on('click','#{$buttonId}', function () {
             var grid = $(\"#{$this->grid->id}\");
-            if (!$(\"input[name='{$this->columnName}']:checked\", grid).length)
-            {
+            if (!$(\"input[name='{$this->columnName}']:checked\", grid).length) {
                 alert('".$this->noCheckedMessage."');
+
                 return false;
             }
             var checked = $('input[name=\"{$this->columnName}\"]:checked');\n
-			var fn = $handler; if ($.isFunction(fn)){fn(checked);}\nreturn false;});\n";
+			var fn = $handler; if ($.isFunction(fn)) {fn(checked);}\nreturn false;});\n";
         }
         Yii::app()->getClientScript()->registerScript(__CLASS__ . '#' . $this->getId(), $js);
     }
@@ -326,7 +324,7 @@ EOD;
                 $table = $model->tableSchema;
                 if (is_string($table->primaryKey)) {
                     $columnName = $this->{$table->primaryKey};
-                } else if (is_array($table->primaryKey)) {
+                } elseif (is_array($table->primaryKey)) {
                     $columnName = $table->primaryKey[0];
                 } // just get the first one
             }
@@ -343,7 +341,6 @@ EOD;
             ),
             $this->checkBoxColumnConfig
         );
-
 
         array_unshift($this->grid->columns, $column);
         $this->columnName = $this->grid->id . '_c0\[\]'; //

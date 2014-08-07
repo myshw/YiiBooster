@@ -7,61 +7,61 @@
  * To change this template use File | Settings | File Templates.
  */
 
-require_once(__DIR__.'/../fakes/CWidget.php');
-require_once(__DIR__.'/../../src/widgets/TbAlert.php');
+require_once __DIR__.'/../fakes/CWidget.php';
+require_once __DIR__.'/../../src/widgets/TbAlert.php';
 
-class TbAlertTest extends PHPUnit_Framework_TestCase {
+class TbAlertTest extends PHPUnit_Framework_TestCase
+{
+    private function makeWidget()
+    {
+        return new TbAlert();
+    }
 
-	private function makeWidget()
-	{
-		return new TbAlert();
-	}
-
-	/**
+    /**
 	 * @test
 	 */
-	public function onInitWhenNoExplicitIdSetDefault()
-	{
-		$widget = $this->makeWidget();
+    public function onInitWhenNoExplicitIdSetDefault()
+    {
+        $widget = $this->makeWidget();
 
-		$expected_id = 'I should be auto-generated';
-		CWidget::$fake_id = $expected_id;
+        $expected_id = 'I should be auto-generated';
+        CWidget::$fake_id = $expected_id;
 
-		$widget->init();
+        $widget->init();
 
-		$this->assertEquals($expected_id, $widget->htmlOptions['id']);
-	}
+        $this->assertEquals($expected_id, $widget->htmlOptions['id']);
+    }
 
-	/**
+    /**
 	 * @test
 	 */
-	public function onInitWhenAlertsStringMakeArray()
-	{
-		$widget = $this->makeWidget();
-		$widget->alerts = 'some_alert_type';
+    public function onInitWhenAlertsStringMakeArray()
+    {
+        $widget = $this->makeWidget();
+        $widget->alerts = 'some_alert_type';
 
-		$widget->init();
+        $widget->init();
 
-		$this->assertInternalType('array', $widget->alerts);
-	}
+        $this->assertInternalType('array', $widget->alerts);
+    }
 
-	/**
+    /**
 	 * @test
 	 */
-	public function onInitWhenNoAlertsSetAllDefined()
-	{
-		$widget = $this->makeWidget();
-		$widget->init();
+    public function onInitWhenNoAlertsSetAllDefined()
+    {
+        $widget = $this->makeWidget();
+        $widget->init();
 
-		$this->assertSame(
-			array(
-				TbAlert::TYPE_SUCCESS,
-				TbAlert::TYPE_INFO,
-				TbAlert::TYPE_WARNING,
-				TbAlert::TYPE_ERROR,
-				TbAlert::TYPE_DANGER
-			),
-			$widget->alerts
-		);
-	}
+        $this->assertSame(
+            array(
+                TbAlert::TYPE_SUCCESS,
+                TbAlert::TYPE_INFO,
+                TbAlert::TYPE_WARNING,
+                TbAlert::TYPE_ERROR,
+                TbAlert::TYPE_DANGER
+            ),
+            $widget->alerts
+        );
+    }
 }

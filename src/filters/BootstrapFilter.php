@@ -15,9 +15,10 @@
  */
 class BootstrapFilter extends CFilter
 {
-	protected function preFilter($filterChain)
-	{
-		Yii::app()->getComponent("bootstrap");
-		return true;
-	}
+    protected function preFilter($filterChain)
+    {
+        Yii::app()->getComponent("bootstrap");
+
+        return true;
+    }
 }

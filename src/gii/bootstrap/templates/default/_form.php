@@ -15,10 +15,10 @@
 
 <?php
 foreach ($this->tableSchema->columns as $column) {
-	if ($column->autoIncrement) {
-		continue;
-	}
-	?>
+    if ($column->autoIncrement) {
+        continue;
+    }
+    ?>
 	<?php echo "<?php echo " . $this->generateActiveRow($this->modelClass, $column) . "; ?>\n"; ?>
 
 <?php

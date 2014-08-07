@@ -19,11 +19,11 @@ array('label'=>'Create <?php echo $this->modelClass; ?>','url'=>array('create'))
 );
 
 Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
+$('.search-button').click(function () {
 $('.search-form').toggle();
 return false;
 });
-$('.search-form form').submit(function(){
+$('.search-form form').submit(function () {
 $.fn.yiiGridView.update('<?php echo $this->class2id($this->modelClass); ?>-grid', {
 data: $(this).serialize()
 });
@@ -56,13 +56,13 @@ return false;
 <?php
 $count = 0;
 foreach ($this->tableSchema->columns as $column) {
-	if (++$count == 7) {
-		echo "\t\t/*\n";
-	}
-	echo "\t\t'" . $column->name . "',\n";
+    if (++$count == 7) {
+        echo "\t\t/*\n";
+    }
+    echo "\t\t'" . $column->name . "',\n";
 }
 if ($count >= 7) {
-	echo "\t\t*/\n";
+    echo "\t\t*/\n";
 }
 ?>
 array(

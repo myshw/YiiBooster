@@ -10,7 +10,6 @@
  * 1. Create a CForm model
  *
 
-
 class FormbuilderTestModel extends CFormModel
 {
 public $search;
@@ -114,17 +113,17 @@ Yii::import('bootstrap.widgets.*');
 
 class TbForm extends CForm
 {
-	/**
+    /**
 	 * @var string the name of the class for representing a form input element. Defaults to 'TbFormInputElement'.
 	 */
-	public $inputElementClass = 'TbFormInputElement';
+    public $inputElementClass = 'TbFormInputElement';
 
-	/**
+    /**
 	 * @var string the name of the class for representing a form button element. Defaults to 'CFormButtonElement'.
 	 */
-	public $buttonElementClass = 'TbFormButtonElement';
+    public $buttonElementClass = 'TbFormButtonElement';
 
-	/**
+    /**
 	 * Create the TbForm and assign the TbActiveForm with options as activeForm
 	 *
 	 * @param array $config
@@ -134,18 +133,18 @@ class TbForm extends CForm
 	 *
 	 * @return mixed
 	 */
-	public static function createForm($config, $parent, $options = array(), $model = null)
-	{
-		$class = __CLASS__;
-		$options['class'] = 'TbActiveForm';
+    public static function createForm($config, $parent, $options = array(), $model = null)
+    {
+        $class = __CLASS__;
+        $options['class'] = 'TbActiveForm';
 
-		$form = new $class($config, $model, $parent);
-		$form->activeForm = $options;
+        $form = new $class($config, $model, $parent);
+        $form->activeForm = $options;
 
-		return $form;
-	}
+        return $form;
+    }
 
-	/**
+    /**
 	 * Override parent
 	 * Remove wrapper with class="row ..."
 	 *
@@ -153,36 +152,36 @@ class TbForm extends CForm
 	 *
 	 * @return string
 	 */
-	public function renderElement($element)
-	{
-		if ($element instanceof TbFormInputElement) {
-			if ($element->type === 'hidden') {
-				return "<div style=\"display:none\">\n" . $element->renderInput() . "</div>\n";
-			} else {
-				return $element->render();
-			}
-		}
+    public function renderElement($element)
+    {
+        if ($element instanceof TbFormInputElement) {
+            if ($element->type === 'hidden') {
+                return "<div style=\"display:none\">\n" . $element->renderInput() . "</div>\n";
+            } else {
+                return $element->render();
+            }
+        }
 
-		return parent::renderElement($element);
-	}
+        return parent::renderElement($element);
+    }
 
-	/**
+    /**
 	 * Render the buttons as TbFormButtonElement
 	 *
 	 * @return string
 	 */
-	public function renderButtons()
-	{
-		$output = '';
-		foreach ($this->getButtons() as $button) {
-			$output .= $this->renderElement($button) . '&nbsp;';
-		}
+    public function renderButtons()
+    {
+        $output = '';
+        foreach ($this->getButtons() as $button) {
+            $output .= $this->renderElement($button) . '&nbsp;';
+        }
 
-		//form-actions div wrapper only if not is inline form
-		if ($output !== '' && $this->getActiveFormWidget()->type !== 'inline') {
-			$output = "<div class=\"form-actions\">\n" . $output . "</div>\n";
-		}
+        //form-actions div wrapper only if not is inline form
+        if ($output !== '' && $this->getActiveFormWidget()->type !== 'inline') {
+            $output = "<div class=\"form-actions\">\n" . $output . "</div>\n";
+        }
 
-		return $output;
-	}
+        return $output;
+    }
 }

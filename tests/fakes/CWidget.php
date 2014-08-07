@@ -7,11 +7,11 @@
 class CWidget
 {
 
-	/** @var string Fake ID which we can set in our tests to get meaningful results from `getId()` calls. */
-	public static $fake_id;
+    /** @var string Fake ID which we can set in our tests to get meaningful results from `getId()` calls. */
+    public static $fake_id;
 
-	public function getId()
-	{
-		return self::$fake_id;
-	}
+    public function getId()
+    {
+        return self::$fake_id;
+    }
 }
